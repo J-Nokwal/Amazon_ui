@@ -149,9 +149,9 @@ class ProductList extends StatelessWidget {
                           ? Container(
                               color: Colors.red,
                               height: 18,
-                              width: 120,
+                              width: 140,
                               child: Text(
-                                "  Limited time deal",
+                                "  LIMITED TIME DEAL",
                                 style: TextStyle(color: Colors.white),
                               ),
                             )

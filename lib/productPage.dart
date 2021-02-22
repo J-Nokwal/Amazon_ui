@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ui_design/appBar.dart';
+import 'package:ui_design/productList.dart';
 
 class ProductPage extends StatelessWidget {
   final item;
@@ -29,7 +30,8 @@ class ProductPage extends StatelessWidget {
             Bar(),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                physics: BouncingScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(15, 10, 10, 15),
                 children: [
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,7 +39,7 @@ class ProductPage extends StatelessWidget {
                       Text("category : ${item["category"]}"),
                       Expanded(child: Container()),
                       RatingBar.builder(
-                        initialRating: Random().nextDouble() * 5,
+                        initialRating: rating,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
@@ -67,10 +69,10 @@ class ProductPage extends StatelessWidget {
                     item["description"],
                     textAlign: TextAlign.justify,
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   Container(
                     height: 300,
-                    color: Colors.amber,
+                    color: Colors.white70,
                     child: Hero(
                       tag: item.toString() + isVertical.toString(),
                       child: Image(image: NetworkImage(item["image"])),
@@ -113,17 +115,56 @@ class ProductPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  isLimmitedTime
-                      ? Container(
-                          color: Colors.red,
-                          height: 40,
-                          padding: EdgeInsets.fromLTRB(10, 10, 100, 10),
-                          child: Text(
-                            "  Limited time deal",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      : Container(),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      isLimmitedTime
+                          ? Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  color: Colors.red),
+                              height: 18,
+                              width: 140,
+                              child: Text(
+                                "  LIMITED TIME DEAL",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          : Container(),
+                      Text("FREE delivery"),
+                      // HorizontalList(),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.black, width: 0.5),
+                          color: Colors.amber[700]),
+                      child: Center(child: Text("Buy Now")),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.black, width: 0.5),
+                          color: Colors.amber[500]),
+                      child: Center(child: Text("Add To Cart")),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "In Stock.",
+                    style: TextStyle(color: Colors.green[600]),
+                  ),
+                  HorizontalList(),
                 ],
               ),
             )
