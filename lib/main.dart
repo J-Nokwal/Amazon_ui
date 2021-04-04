@@ -31,7 +31,7 @@ class MyHomePage extends StatelessWidget {
         children: [
           Bar(),
           Expanded(
-            child: VerticalList(),
+            child: Text("Hello"),
           ),
         ],
       ),
